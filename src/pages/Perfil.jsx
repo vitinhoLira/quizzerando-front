@@ -1,18 +1,48 @@
 import Header from '../components/Header'
 import {Button,Card,Form,Col,Row} from 'react-bootstrap';
 import { Link} from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ModalCentralizado from '../components/Modais/ModalCentralizado';
+import API_URL from "../API.route";
+import { AuthContext } from "../contexts/AuthContexts";
 
 export default function Perfil(){
-
 
     const [modalShowNome, setModalShowNome] = useState(false);
     const [modalShowEmail, setModalShowEmail] = useState(false);
     const [modalShowSenha, setModalShowSenha] = useState(false);
-
-   
+    const [reload, setReload] = useState(true);
     
+
+    const[nome, setNome]=useState("");
+    const[email, setEmail]=useState("");
+    
+
+    const {userId,token,signOut} = useContext(AuthContext)
+
+    useEffect(()=>{
+        console.log("UserId:", userId);
+
+        if (!userId) return;
+
+        fetch(API_URL +"/usuario/"+userId, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                
+            })
+                .then(res => res.json())
+                .then(resp => {
+                    console.log(resp);
+                    setNome(resp.nome);
+                    setEmail(resp.email);
+                    
+                })
+                .catch(err => console.error(err))
+	
+    },[userId,token,reload]);
+
     return (
         <>
     {/*Modais*/}
@@ -27,11 +57,14 @@ export default function Perfil(){
             Nome:
             </Form.Label>
             <Col sm="20">
-            <Form.Control type="text" name="name" placeholder="Digite seu novo nome" required/>
+            <Form.Control type="text" name="nome" placeholder="Digite seu novo nome"  required/>
             </Col>
         </Form.Group>
-      
+        
         }
+        setReload={setReload}
+        reload={reload}
+
       />
 
       <ModalCentralizado
@@ -48,6 +81,8 @@ export default function Perfil(){
             </Col>
         </Form.Group>
         }
+        setReload={setReload}
+        reload={reload}
       />
 
       <ModalCentralizado
@@ -56,37 +91,29 @@ export default function Perfil(){
         children={
 
         <Form.Group as={Row} className="mb-3" >
-            <Form.Label column sm="3">
-            Senha atual:
-            </Form.Label>
-            <Col sm="20">
-            <Form.Control type="text" name="senhaAtual" placeholder="Digite sua senha atual" required/>
-            </Col>
-
+            
             <Form.Label column sm="3">
             Nova senha:
             </Form.Label>
             <Col sm="20">
-            <Form.Control type="text" name="novaSenha" placeholder="Digite sua nova senha" required/>
+            <Form.Control type="password" name="senha" placeholder="Digite sua nova senha" minLength={8} required/>
             </Col>
 
             <Form.Label column sm="4">
             Confirme senha:
             </Form.Label>
             <Col sm="20">
-            <Form.Control type="text" name="confirmeSenha" placeholder="Confirme sua nova senha" required/>
+            <Form.Control type="password" name="confirmeSenha" placeholder="Confirme sua nova senha" minLength={8} required/>
             </Col>
         </Form.Group>
         }
-      />
-      
-      {/**/}
+        setReload={setReload}
+        reload={reload}
 
+      />
 
         <Header/>
        
-
-      
         <div className="form-perfil col-12 d-flex align-items-center justify-content-center vh-100 ">
         
                 <Card style={{ width: '50rem' }} className='p-4 bg-light border-light-subtle rounded-4'>
@@ -97,7 +124,7 @@ export default function Perfil(){
                         <Form.Group className="mb-3">
                             <Form.Label>Nome </Form.Label>
                             <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
-                            <Form.Control name="nome" type="text" placeholder="cleiton28" disabled />
+                            <Form.Control name="nome" type="text" placeholder={nome} disabled />
                             <button
                                 onClick={()=>setModalShowNome(true)}
                                 style={{
@@ -119,7 +146,7 @@ export default function Perfil(){
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <Form.Control
                                 type="email"
-                                placeholder="cleiton@gmail.com"
+                                placeholder={email}
                                 
                                 disabled
                                 />
@@ -141,7 +168,7 @@ export default function Perfil(){
                         <Form.Group className="mb-3">
                             <Form.Label>Senha</Form.Label>
                             <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
-                            <Form.Control name='senha' type="password" placeholder="*****"  disabled />
+                            <Form.Control name='senha' type="password" placeholder="****************"  disabled />
                             <button
                                 onClick={()=>setModalShowSenha(true)}
                                 style={{
@@ -155,9 +182,7 @@ export default function Perfil(){
                             <img src="./brand/edit.svg" alt="edit"  height="40" />
                             </button>
                             </div>
-                        </Form.Group>
-
-                        
+                        </Form.Group>             
 
                         <div className="d-flex justify-content-between mt-4 pt-4">
                             <Link to='/'>
@@ -165,31 +190,17 @@ export default function Perfil(){
                                     Voltar
                                 </Button>
                             </Link>
-
-                            <Link to='/login'>
-                                <Button >
+                            
+                                <Button onClick={signOut} >
                                     Sair da Conta
                                 </Button>
-                            </Link>
-                                
-                                
+
                         </div>
                     </Form>
                 </Card>
-                
-
-
-
-
+ 
             </div>
        
-
-        
-     
-      
     </>
   );
 }
-
-
-    
