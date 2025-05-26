@@ -1,11 +1,11 @@
 import styles from './CardHistorico.module.css'
 import { useContext, useEffect, useState } from "react";
-import { Accordion, Card } from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import API_URL from "../../API.route";
 import categorias from '../../data/categorias.json'
 import { AuthContext } from "../../contexts/AuthContexts";
 
-export default function CardHistorico({ historicoQuiz, key }) {
+export default function CardHistorico({ historicoQuiz }) {
     const { token } = useContext(AuthContext)
     const [quiz, setQuiz] = useState({})
     const categoria = categorias[quiz.categoria]
@@ -21,9 +21,8 @@ export default function CardHistorico({ historicoQuiz, key }) {
             .then((res) => { return res.json() })
             .then((res) => setQuiz(res))
 
-    }, [])
+    }, [token, historicoQuiz.quizzId])
 
-    console.log(">>>>>>>", quiz)
     return (
         <>
             <Accordion alwaysOpen className={`col-8 ${styles.customAccordion}`}>

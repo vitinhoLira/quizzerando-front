@@ -2,7 +2,7 @@ import { Card } from 'react-bootstrap';
 import SubmitButton from "../components/Buttons/SubmitButton";
 import Form from 'react-bootstrap/Form';
 import LogoSideLayer from '../components/LogoSideLayer/LogoSideLayer';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContexts';
 
@@ -11,7 +11,6 @@ export default function Login() {
     const { signIn, signed } = useContext(AuthContext);
     const [loginInvalido, setLoginInvalido] = useState('')
     const [loginError, setLoginError] = useState('');
-
     const navigate = useNavigate();
 
 
@@ -37,6 +36,7 @@ export default function Login() {
         console.log(logado)
         if (logado === 401){
             setLoginInvalido('Email ou senha incorreto.')
+            console.log(loginError)
         }
 
     };
@@ -84,9 +84,9 @@ export default function Login() {
                         <span className='text-danger my-0 py-0'>{loginInvalido}</span>
 
                         <div className="d-flex justify-content-between align-items-bottom mt-1 pt-4">
-                            {/* <Link to='/esqueceu-senha' className='mt-auto'>
+                            <Link to='/esqueceu-senha' className='mt-auto'>
                                 <span>Esqueceu a senha?</span>
-                            </Link> */}
+                            </Link>
                             <SubmitButton value='Entrar' className='ms-auto'/>
                         </div>
                     </Form>

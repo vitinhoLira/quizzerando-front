@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import QuizCard from "../components/QuizCard/QuizCard";
-import OffCanvas from "../components/OffCanvas/OffCanvas";
-import Filtragem from "../components/Filtragem/Filtragem";
 import NavPagination from "../components/NavPagination";
 import { Link } from "react-router-dom";
 import API_URL from "../API.route";
@@ -12,7 +10,6 @@ import Loading from "../components/Loading/Loading";
 
 export default function Home() {
 	const [quizzes, setQuizzes] = useState([])
-	const [filtros, setFiltros] = useState([])
 	const {userId ,token} = useContext(AuthContext)
 	const [load, setLoad] = useState(true);
 

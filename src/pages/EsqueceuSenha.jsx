@@ -4,6 +4,7 @@ import LogoSideLayer from "../components/LogoSideLayer/LogoSideLayer";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SubmitButton from "../components/Buttons/SubmitButton";
+import API_URL from '../API.route';
 
 export default function EsqueceuSenha() {
     const navigate = useNavigate();
@@ -17,14 +18,28 @@ export default function EsqueceuSenha() {
         event.preventDefault();
         const formData = new FormData(document.getElementById('formEsqueceuSenha'));
         const data = Object.fromEntries(formData);
-       console.log(data)
+       
 
-        //*aqui ficaria o consumo da api
+        fetch(`${API_URL}/auth/recovery`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then(res => {
+            if (res.status === 200){
+                handleShow()
+                setTimeout(()=>{
+                    handleClose()
+                    navigate('/')
+                }, 8000)
+            }
+        })
 
-        handleShow()
-        navigate("/Login")
+        
         setValidated(true)
-
+        
 
 
     }
