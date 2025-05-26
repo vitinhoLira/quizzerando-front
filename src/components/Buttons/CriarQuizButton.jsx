@@ -7,7 +7,7 @@ export default function CriarQuizButton() {
 
     return (
         <>
-            {role === 'admin' && <Button className="rounded-pill fw-medium">
+            {role === 'admin' && <Button className="rounded-pill fw-medium px-4 my-4">
                 <i className="fa fa-plus me-2"></i>Criar Quiz
             </Button>}
         </>

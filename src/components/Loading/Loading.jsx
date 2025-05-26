@@ -1,10 +1,10 @@
 import { Container, Spinner } from "react-bootstrap";
 
-export default function Loading() {
+export default function Loading({...props}) {
 
 
     return (
-        <Container className="d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
+        <Container {...props} className="d-flex justify-content-center align-items-center order-2" style={{ height: '50vh' }}>
             <Spinner animation="border" role="status">
                 <span className="visually-hidden">Carregando...</span>
             </Spinner>

@@ -54,16 +54,16 @@ export default function Home() {
 			<div className="d-flex flex-wrap justify-content-evenly mt-4 col-12">
 
 				<div className="d-flex justify-content-between col-11 px-2">
-					<Link to='/quiz/criar' className="d-xl-none px-4 float-start">
+					<Link to='/quiz/criar' className=" px-4 mx-auto">
 						<CriarQuizButton/>
 					</Link>
 
-					<OffCanvas button='Filtros' titulo='Filtrar Quizzes'>
+					{/* <OffCanvas button='Filtros' titulo='Filtrar Quizzes'>
 						<Link to='/quiz/criar' className="mt-3 mb-4 px-4 mx-auto ">
 							<CriarQuizButton/>
 						</Link>
 						<Filtragem setFiltros={setFiltros} filtros={filtros} />
-					</OffCanvas>
+					</OffCanvas> */}
 				</div>
 
 
@@ -82,7 +82,7 @@ export default function Home() {
 				</section>
 
 
-				<aside className="d-none d-xl-flex flex-column border border-dark-subtle rounded-4 h-100 mt-4 pt-3" style={{ width: "21%" }} id='asideDiv'>
+				{/* <aside className="d-none d-xl-flex flex-column border border-dark-subtle rounded-4 h-100 mt-4 pt-3" style={{ width: "21%" }} id='asideDiv'>
 
 					<div className="d-flex flex-column bg-white">
 						<Link to='/quiz/criar' className="mx-auto px-4 fw-medium">
@@ -94,7 +94,7 @@ export default function Home() {
 					</div>
 
 					<Filtragem className="d-none d-xl-flex" id='asideFilter' setFiltros={setFiltros} filtros={filtros} />
-				</aside>
+				</aside> */}
 			</div>
 
 			<NavPagination

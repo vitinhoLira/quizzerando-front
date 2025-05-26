@@ -9,12 +9,13 @@ export const AuthProvider = ({ children }) => {
     const [role, setRole] = useState(localStorage.getItem('role'))
     const [token, setToken] = useState(localStorage.getItem('auth'))
     const [userInfo, setUserInfo] = useState(localStorage.getItem('userInfo'))
-    const [userId, setUserId] = useState(localStorage.getItem('user@id'))
+    const [userId, setUserId] = useState('')
 
     const navigate = useNavigate()
 
     useEffect(() => {
         setToken(localStorage.getItem('auth'))
+        setRole(localStorage.getItem('role'))
         setUserId(localStorage.getItem('user@id'))
         setUserInfo(localStorage.getItem('userInfo'))
     }, [])
@@ -39,6 +40,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('auth', responseData.token)
             localStorage.setItem('role', responseData.role)
             localStorage.setItem('user@id', responseData.id)
+            setUserId(localStorage.getItem('user@id'))
+            setRole(responseData.role)
             setToken(responseData.token)
             return true
         }

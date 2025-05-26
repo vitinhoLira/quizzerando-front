@@ -84,10 +84,10 @@ export default function Login() {
                         <span className='text-danger my-0 py-0'>{loginInvalido}</span>
 
                         <div className="d-flex justify-content-between align-items-bottom mt-1 pt-4">
-                            <Link to='/esqueceu-senha' className='mt-auto'>
+                            {/* <Link to='/esqueceu-senha' className='mt-auto'>
                                 <span>Esqueceu a senha?</span>
-                            </Link>
-                            <SubmitButton value='Entrar' />
+                            </Link> */}
+                            <SubmitButton value='Entrar' className='ms-auto'/>
                         </div>
                     </Form>
                 </Card>

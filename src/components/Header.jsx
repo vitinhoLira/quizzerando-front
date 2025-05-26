@@ -21,7 +21,7 @@ export default function Header() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="gap-2">
 
-                    <div className="my-auto col-12 col-lg-5 mx-auto mb-1">
+                    {/* <div className="my-auto col-12 col-lg-5 mx-auto mb-1">
                         <InputGroup className="">
                             <Form.Control
                                 placeholder="Buscar quiz"
@@ -34,7 +34,7 @@ export default function Header() {
                                 <i className="fa fa-search mx-1"></i>
                             </Button>
                         </InputGroup>
-                    </div>
+                    </div> */}
 
                     <Nav className="ms-auto text-body-primary column-gap-2 row-gap-1">
                         <Nav.Link as={Link} to="/" className="text-white text-indigo-50 bg-hover-primary border-light-subtle rounded-pill px-3 pe-auto ">Home</Nav.Link>

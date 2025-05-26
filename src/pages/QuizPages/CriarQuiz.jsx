@@ -18,7 +18,7 @@ export default function CriarQuiz() {
     const [altsIncorretas, setAltsIncorretas] = useState([]);
     const [showPerguntas, setShowPerguntas] = useState(false);
     const [showConfirmacao, setShowConfirmacao] = useState(false);
-    const token = localStorage.getItem(`auth`)
+    const {userId, token} = useContext(AuthContext)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -43,10 +43,10 @@ export default function CriarQuiz() {
             return
         }
 
-        setPerguntasCad([...perguntasCad, data])
+        setPerguntasCad([...perguntasCad, data]);
 
         setValidated(false);
-        setShowPerguntas(false)
+        setShowPerguntas(false);
         setAltsIncorretas([]);
 
     }
@@ -63,8 +63,8 @@ export default function CriarQuiz() {
             return
         }
 
-        quizData.userId = 2
-        quizData.ativo = true
+        quizData.userId = userId;
+        quizData.ativo = true;
 
         try {
             const res = await fetch(API_URL + "/quizz/cad", {
